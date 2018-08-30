@@ -13,8 +13,10 @@ class App extends Component {
       <div>
         <Nav />
 
-        <Route path="/home" component={Home} />
-        <Route path="/crCalculator" component={CrCalculator} />
+        <div className="container">
+          <Route path="/home" component={Home} />
+          <Route path="/crCalculator" component={CrCalculator} />
+        </div>
       </div>
     );
   }
