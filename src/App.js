@@ -1,16 +1,18 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { Route } from "react-router-dom";
+
+import Nav from "./components/main/Nav";
+import CrCalculator from "./components/crCalculator/calc";
+
+import "./App.scss";
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        
+      <div>
+        <Nav />
+
+        <Route path="/crCalculator" component={CrCalculator} />
       </div>
     );
   }
