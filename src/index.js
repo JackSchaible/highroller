@@ -1,4 +1,4 @@
-import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootswatch/dist/cyborg/bootstrap.min.css'
 import $ from 'jquery';
 import Popper from 'popper.js'
 import React from 'react';
