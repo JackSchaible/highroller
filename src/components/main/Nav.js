@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 class Nav extends Component {
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-        <Link className="navbar-brand" to="/">
+        <NavLink className="navbar-brand" to="/">
           <i className="fa fa-dice" /> High Roller
-        </Link>
+        </NavLink>
         <button
           className="navbar-toggler"
           type="button"
@@ -22,16 +22,19 @@ class Nav extends Component {
 
         <div className="collapse navbar-collapse" id="navbarColor01">
           <ul className="navbar-nav mr-auto">
-            <li className="nav-item active">
-              <Link className="nav-link" to="/">
-                <i className="fa fa-home" /> Home{" "}
-                <span className="sr-only">(current)</span>
-              </Link>
+            <li className="nav-item">
+              <NavLink className="nav-link" activeClassName="active" to="/home">
+                <i className="fa fa-home" /> Home
+              </NavLink>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/crcalculator">
+              <NavLink
+                className="nav-link"
+                activeClassName="active"
+                to="/crcalculator"
+              >
                 <i className="fa fa-calculator" /> CR Calculator
-              </Link>
+              </NavLink>
             </li>
           </ul>
         </div>
