@@ -1,9 +1,22 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 
-import './Nav.css';
+import "./Nav.css";
 
 class Nav extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showMenu: false
+    };
+  }
+
+  handleClick = () => {
+    this.setState({
+      showMenu: !this.state.showMenu
+    });
+  };
+
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -13,16 +26,17 @@ class Nav extends Component {
         <button
           className="navbar-toggler"
           type="button"
-          data-toggle="collapse"
-          data-target="#navbarColor01"
-          aria-controls="navbarColor01"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
+          onClick={this.handleClick}
         >
-          <span className="navbar-toggler-icon" />
+          <i className="fa fa-bars" />
         </button>
 
-        <div className="collapse navbar-collapse" id="navbarColor01">
+        <div
+          className={
+            "collapse navbar-collapse" + (this.state.showMenu ? " show" : "")
+          }
+          id="navbarColor01"
+        >
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
               <NavLink className="nav-link" activeClassName="active" to="/">
