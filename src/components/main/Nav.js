@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 
+import './Nav.css';
+
 class Nav extends Component {
   render() {
     return (
@@ -23,7 +25,7 @@ class Nav extends Component {
         <div className="collapse navbar-collapse" id="navbarColor01">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
-              <NavLink className="nav-link" activeClassName="active" to="/home">
+              <NavLink className="nav-link" activeClassName="active" to="/">
                 <i className="fa fa-home" /> Home
               </NavLink>
             </li>
@@ -31,7 +33,7 @@ class Nav extends Component {
               <NavLink
                 className="nav-link"
                 activeClassName="active"
-                to="/crcalculator"
+                to="/CRCalculator"
               >
                 <i className="fa fa-calculator" /> CR Calculator
               </NavLink>

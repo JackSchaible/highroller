@@ -5,7 +5,7 @@ import Nav from "./components/main/Nav";
 import Home from "./components/main/Home";
 import CrCalculator from "./components/crCalculator/calc";
 
-import "./App.scss";
+import "./App.css";
 
 class App extends Component {
   render() {
@@ -14,8 +14,8 @@ class App extends Component {
         <Nav />
 
         <div className="container">
-          <Route path="/home" component={Home} />
-          <Route path="/crCalculator" component={CrCalculator} />
+          <Route exact path="/" component={Home} />
+          <Route path="/CRCalculator" component={CrCalculator} />
         </div>
       </div>
     );

@@ -2,6 +2,7 @@
   "name": "high-roller",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://dm.jackschaible.com/",
   "dependencies": {
     "bootswatch": "^4.1.3",
     "jquery": "^3.3.1",

@@ -135,7 +135,7 @@ module.exports = {
             test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
             loader: require.resolve('url-loader'),
             options: {
-              limit: 10000,
+              limit: 1000000,
               name: 'static/media/[name].[hash:8].[ext]',
             },
           },
@@ -155,8 +155,32 @@ module.exports = {
           //Sass
           {
             test: /\.scss$/,
-            include: paths.appSrc,
-            loaders: ["style", "css", "sass"]
+            use: [
+              { loader: require.resolve('style-loader') },
+              {
+                loader: require.resolve('css-loader'),
+                options: { importLoaders: 1 }
+              },
+              { loader: require.resolve('sass-loader') },
+              {
+                loader: require.resolve('postcss-loader'),
+                options: {
+                  ident: 'postcss',
+                  plugins: () => {
+                    require('postcss-flexbugs-fixes'),
+                    autoprefixer({
+                      browsers: [
+                        '>1%',
+                        'last 4 versions',
+                        'Firefox ESR',
+                        'not ie < 9'
+                      ],
+                      flexbox: 'no-2009'
+                    })
+                  }
+                }
+              }
+            ]
           },
           // "postcss" loader applies autoprefixer to our CSS.
           // "css" loader resolves paths in CSS and adds assets as dependencies.

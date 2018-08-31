@@ -1,0 +1,21 @@
+.c-bg_img {
+    background-size: cover;
+    background-image: url('../../img/bg.png');
+    height: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+
+    .c-bg_artist-credits {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(25, 25, 25, 0.5);
+
+        a {
+            color: #fff;
+        }
+    }
+}

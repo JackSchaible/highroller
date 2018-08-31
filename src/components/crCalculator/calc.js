@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "../../styles/Common.css";
 import Input from '../forms/input';
 
+import './calc.css';
+
 class CrCalulator extends Component {
   values = {
 
@@ -45,10 +47,10 @@ class CrCalulator extends Component {
   calculateCr() {
     let cr = 0, xp = 0, hpRating = 0, acRating = 0, dpsRating = 0, babRating = 0, defensiveCR = 0, offensiveCR = 0;
 
-    hpRating = this.getHPRating(parseInt(this.values.hp));
-    acRating = this.getACRating(parseInt(this.values.ac));
-    dpsRating = this.getDPSRating(parseInt(this.values.dps));
-    babRating = this.getBABRating(parseInt(this.values.bab));
+    hpRating = this.getHPRating(parseInt(this.values.hp, 10));
+    acRating = this.getACRating(parseInt(this.values.ac, 10));
+    dpsRating = this.getDPSRating(parseInt(this.values.dps, 10));
+    babRating = this.getBABRating(parseInt(this.values.bab, 10));
 
     defensiveCR = hpRating;
     let defDiff = acRating - hpRating;
