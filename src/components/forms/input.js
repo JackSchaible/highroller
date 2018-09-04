@@ -1,146 +1,179 @@
 import React, { Component } from "react";
 import "../../styles/Common.css";
+import "./input.css";
+import { isArray } from "util";
 
 class Input extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: "",
-      valid: false,
-      touched: false,
-      pristine: true,
-      error: "",
-      type: props.type,
-      containerClasses: "form-group " + props.containerClasses,
-      id: props.id,
-      label: props.label,
-      placeholder: props.placeholder,
-      validators: props.validators,
-      onChange: props.onChange,
-      tabIndex: props.tabIndex
-    };
+	constructor(props) {
+		super(props);
+		this.state = {
+			value: "",
+			valid: false,
+			touched: false,
+			pristine: true,
+			error: "",
+			type: !!props.type ? props.type : "text",
+			containerClasses: "form-group " + props.containerClasses,
+			id: props.id,
+			label: props.label,
+			placeholder: props.placeholder,
+			validators: props.validators,
+			onChange: props.onChange,
+			tabIndex: props.tabIndex
+		};
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
-  }
+		this.handleChange = this.handleChange.bind(this);
+		this.handleBlur = this.handleBlur.bind(this);
+	}
 
-  handleChange(event) {
-    this.setState({ value: event.target.value });
-    this.isValid(false, event.target.value);
+	handleChange(event) {
+		this.setState({ value: event.target.value });
+		this.isValid(false, event.target.value);
 
-    this.state.onChange(this.state.id, event.target.value);
-  }
+		if (this.state.onChange)
+			this.state.onChange(this.state.id, event.target.value);
+	}
 
-  handleBlur() {
-    this.setState({
-      touched: true,
-      pristine: false
-    });
+	handleBlur() {
+		this.setState({
+			touched: true,
+			pristine: false
+		});
 
-    this.isValid(!this.state.touched);
-  }
+		this.isValid(!this.state.touched);
+	}
 
-  isValid(justTouched, newValue) {
-    let value = this.state.value;
-    if (!value && newValue) value = newValue;
+	isValid(justTouched, newValue) {
+		let value = this.state.value;
+		if (!value && newValue) value = newValue;
 
-    let me = this,
-      valid = true;
+		let me = this,
+			valid = true;
 
-    this.state.validators.forEach(e => {
-      if (valid) {
-        if (e.type === "Required") {
-          if (!value) {
-            me.setState({
-              error: (
-                <span>
-                  <i className="fal fa-engine-warning" /> A value must be
-                  entered.
-                </span>
-              )
-            });
-            valid = false;
-          }
-        } else {
-          const numericValue = parseFloat(value);
+		if (!this.state.validators || !isArray(this.state.validators)) return valid;
 
-          if (e.type === "Numeric") {
-            if (isNaN(numericValue)) {
-              me.setState({
-                error: (
-                  <span>
-                    <i className="fal fa-engine-warning" /> A numeric value must
-                    be entered.
-                  </span>
-                )
-              });
-              valid = false;
-            }
-          } else if (e.type === "Range") {
-            if (e.min && !e.max && numericValue < e.min) {
-              me.setState({
-                error: (
-                  <span>
-                    <i className="fal fa-engine-warning" /> Value must be
-                    greater than {e.min}.
-                  </span>
-                )
-              });
-              valid = false;
-            } else if (e.max && !e.min && numericValue > e.max) {
-              me.setState({
-                error: (
-                  <span>
-                    <i className="fal fa-engine-warning" /> Value must be less
-                    than {e.max}.
-                  </span>
-                )
-              });
-              valid = false;
-            } else if (numericValue > e.max || numericValue < e.min) {
-              me.setState({
-                error: (
-                  <span>
-                    <i className="fal fa-engine-warning" /> Value must be
-                    between {e.min} and {e.max}.
-                  </span>
-                )
-              });
-              valid = false;
-            }
-          }
-        }
-      }
-    });
+		this.state.validators.forEach(e => {
+			if (valid) {
+				if (e.type === "Required") {
+					if (!value) {
+						me.setState({
+							error: (
+								<span>
+									<i className="fal fa-engine-warning" /> A value must be
+									entered.
+								</span>
+							)
+						});
+						valid = false;
+					}
+				} else {
+					const numericValue = parseFloat(value);
 
-    let result;
+					if (e.type === "Numeric") {
+						if (isNaN(numericValue)) {
+							me.setState({
+								error: (
+									<span>
+										<i className="fal fa-engine-warning" /> A numeric value must
+										be entered.
+									</span>
+								)
+							});
+							valid = false;
+						}
+					} else if (e.type === "Range") {
+						if (e.min && !e.max && numericValue < e.min) {
+							me.setState({
+								error: (
+									<span>
+										<i className="fal fa-engine-warning" /> Value must be
+										greater than {e.min}.
+									</span>
+								)
+							});
+							valid = false;
+						} else if (e.max && !e.min && numericValue > e.max) {
+							me.setState({
+								error: (
+									<span>
+										<i className="fal fa-engine-warning" /> Value must be less
+										than {e.max}.
+									</span>
+								)
+							});
+							valid = false;
+						} else if (numericValue > e.max || numericValue < e.min) {
+							me.setState({
+								error: (
+									<span>
+										<i className="fal fa-engine-warning" /> Value must be
+										between {e.min} and {e.max}.
+									</span>
+								)
+							});
+							valid = false;
+						}
+					}
+				}
+			}
+		});
 
-    if (!justTouched) result = valid || !this.state.touched;
-    else result = valid;
+		let result;
 
-    if (valid) this.setState({ error: null });
+		if (!justTouched) result = valid || !this.state.touched;
+		else result = valid;
 
-    return result;
-  }
+		if (valid) this.setState({ error: null });
 
-  render() {
-    return (
-      <div className={this.state.containerClasses}>
-        <label htmlFor={this.state.id}>{this.state.label}</label>
-        <input
-          tabIndex={this.state.tabIndex}
-          name={this.state.id}
-          type={this.state.type}
-          className="form-control"
-          placeholder={this.state.placeholder}
-          value={this.state.value}
-          onChange={this.handleChange}
-          onBlur={this.handleBlur}
-        />
-        <p className="text-danger u-margin-top-half">{this.state.error}</p>
-      </div>
-    );
-  }
+		return result;
+	}
+
+	render() {
+		let view = null;
+
+		if (
+			!this.state.type ||
+			this.state.type === "text" ||
+			this.state.type === "number"
+		)
+			view = (
+				<div>
+					<label htmlFor={this.state.id}>{this.state.label}</label>
+					<input
+						tabIndex={this.state.tabIndex}
+						name={this.state.id}
+						type={this.state.type}
+						className="form-control"
+						placeholder={this.state.placeholder}
+						value={this.state.value}
+						onChange={this.handleChange}
+						onBlur={this.handleBlur}
+					/>
+				</div>
+			);
+		else if (this.state.type === "radio" || this.state.type === "checkbox")
+			view = (
+				<label className="u-flex u-flex__align-items--center">
+					<input
+						tabIndex={this.state.tabIndex}
+						name={this.state.id}
+						type={this.state.type}
+						placeholder={this.state.placeholder}
+						value={this.state.value}
+						onChange={this.handleChange}
+						onBlur={this.handleBlur}
+					/>
+					<span>{this.state.label}</span>
+				</label>
+			);
+
+		return (
+			<div className={this.state.containerClasses}>
+				{view}
+				<p className="text-danger u-margin-top-half">{this.state.error}</p>
+			</div>
+		);
+	}
 }
 
 export default Input;
