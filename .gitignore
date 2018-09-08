@@ -21,4 +21,7 @@ yarn-debug.log*
 yarn-error.log*
 
 #CSS
-src/**/*.css
+**/*.css
+
+#VS Code
+.vscode/
