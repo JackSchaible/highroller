@@ -365,7 +365,7 @@ class CrCalulator extends Component {
 						placeholder="Attack Bonus"
 						tabIndex="4"
 					/>
-
+					{/*
 					<Collapse headerContent="Advanced Options">
 						<div className="u-flex u-flex__wrap">
 							<div className="col-sm-6 col-12">
@@ -378,7 +378,7 @@ class CrCalulator extends Component {
 								/>
 							</div>
 						</div>
-					</Collapse>
+</Collapse>*/}
 					{crDiv}
 				</div>
 			</div>
