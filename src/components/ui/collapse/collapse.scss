@@ -1,0 +1,31 @@
+.c-collapse {
+	flex: 0 0 100%;
+	width: 100%;
+
+	.c-collapse__header {
+		cursor: pointer;
+		position: relative;
+
+		i {
+			right: 20px;
+			position: absolute;
+			transform: rotate(-180deg) scale(1.5);
+
+			transition-property: all;
+			transition-duration: 0.5s;
+			transition-timing-function: ease-in-out;
+		}
+	}
+
+	&.shown {
+		.c-collapse__body {
+			display: none;
+		}
+
+		.c-collapse__header {
+			i {
+				transform: rotate(0deg) scale(1.5);
+			}
+		}
+	}
+}
