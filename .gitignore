@@ -23,5 +23,9 @@ yarn-error.log*
 #CSS
 **/*.css
 
-#VS Code
+#VS
 .vscode/
+obj/
+**/*.csproj.user
+.vs/
+bin/
